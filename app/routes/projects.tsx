@@ -1,6 +1,6 @@
 import { useEffect, useState, type JSX } from "react";
 import { motion } from "framer-motion";
-import { Code, Database, Globe, Rocket } from "lucide-react"; // 🔹 iconos de lucide
+import { Code, Database, Globe, Rocket } from "lucide-react";
 
 type Repo = {
   id: number;
@@ -37,10 +37,30 @@ export default function Projects() {
       .finally(() => setLoading(false));
   }, []);
 
-  if (loading) return <p className="text-slate-400">⏳ Cargando proyectos...</p>;
-  if (error) return <p className="text-red-400">❌ {error}</p>;
+  // ⏳ Loading con skeleton
+  if (loading)
+    return (
+      <section className="max-w-6xl mx-auto px-4 py-16">
+        <h2 className="text-3xl font-bold mb-8 text-sky-400">
+          🚀 Mis Proyectos GitHub
+        </h2>
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {Array.from({ length: 6 }).map((_, i) => (
+            <div
+              key={i}
+              className="h-40 rounded-2xl bg-slate-800/50 animate-pulse"
+            />
+          ))}
+        </div>
+      </section>
+    );
 
-  // 🎨 Asignamos color, icono y emoji según el lenguaje
+  if (error)
+    return (
+      <p className="text-red-400 text-center mt-10">❌ {error}</p>
+    );
+
+  // 🎨 Estilos por lenguaje
   const languageStyles: Record<
     string,
     { style: string; icon: JSX.Element; emoji: string }
@@ -72,13 +92,37 @@ export default function Projects() {
     },
   };
 
+  // ⏱ Función fecha relativa
+  const getRelativeTime = (date: string) => {
+    const diff = (new Date(date).getTime() - Date.now()) / 1000;
+    const rtf = new Intl.RelativeTimeFormat("es", { numeric: "auto" });
+
+    const divisions: [number, Intl.RelativeTimeFormatUnit][] = [
+      [60, "second"],
+      [60, "minute"],
+      [24, "hour"],
+      [7, "day"],
+      [4.34524, "week"],
+      [12, "month"],
+      [Number.POSITIVE_INFINITY, "year"],
+    ];
+
+    let duration = diff;
+    for (let [amount, unit] of divisions) {
+      if (Math.abs(duration) < amount) {
+        return rtf.format(Math.round(duration), unit);
+      }
+      duration /= amount;
+    }
+  };
+
   return (
     <section className="max-w-6xl mx-auto px-4 py-16">
       <h2 className="text-3xl font-bold mb-8 text-sky-400">
         🚀 Mis Proyectos GitHub
       </h2>
 
-      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {repos.map((repo, i) => {
           const lang = repo.language || "Otro";
           const { style, icon, emoji } =
@@ -94,34 +138,26 @@ export default function Projects() {
               href={repo.html_url}
               target="_blank"
               rel="noopener noreferrer"
+              aria-label={`Ir al proyecto ${repo.name}`}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: i * 0.1, duration: 0.5 }}
+              transition={{ delay: i * 0.05, duration: 0.4 }}
               whileHover={{ scale: 1.05 }}
               className="group rounded-2xl border border-slate-700 bg-slate-900/60 p-5 hover:bg-slate-800 hover:shadow-sky-500/30 transition-all shadow-md"
             >
-              {/* Nombre con emoji */}
               <h3 className="font-semibold text-sky-400 group-hover:text-sky-300 text-lg flex items-center gap-2">
                 {emoji} {repo.name}
               </h3>
-
-              {/* Descripción */}
               <p className="mt-2 text-sm text-slate-300 line-clamp-2">
-                {repo.description || "Sin descripción 📭"}
+                {repo.description || "📭 Sin descripción"}
               </p>
-
-              {/* Lenguaje */}
-              {lang && (
-                <span
-                  className={`inline-flex items-center gap-1 mt-3 text-xs px-2 py-1 rounded-full border ${style}`}
-                >
-                  {icon} {lang}
-                </span>
-              )}
-
-              {/* Última actualización */}
+              <span
+                className={`inline-flex items-center gap-1 mt-3 text-xs px-2 py-1 rounded-full border ${style}`}
+              >
+                {icon} {lang}
+              </span>
               <p className="mt-3 text-xs text-slate-400 italic">
-                ⏱ {new Date(repo.updated_at).toLocaleDateString()}
+                ⏱ {getRelativeTime(repo.updated_at)}
               </p>
             </motion.a>
           );

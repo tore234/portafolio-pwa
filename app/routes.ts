@@ -1,3 +1,4 @@
+
 import { route, type RouteConfig } from "@react-router/dev/routes";
 
 export default [
@@ -7,4 +8,7 @@ export default [
   route("about",          "routes/about.tsx"),         // Sobre mí
   route("contact",        "routes/contact.tsx"),       // Contacto
   route("thank-you",      "routes/thank-you.tsx"),     // Gracias tras formulario
+
+  // 👇 Catch-all: cualquier ruta desconocida
+  route("*",              "routes/not-found.tsx"),
 ] satisfies RouteConfig;

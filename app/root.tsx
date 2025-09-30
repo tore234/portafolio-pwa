@@ -12,6 +12,8 @@ import "./app.css";
 import { NavLink } from "react-router";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import ChatBot from "./components/ChatBot"; // 🔹 Import del chatbot
+
 
 // 🔹 Safe wrapper para evitar errores en SSR
 function SafeAnimatePresence({ children }: { children: React.ReactNode }) {
@@ -151,6 +153,9 @@ export function Layout({ children }: { children: React.ReactNode }) {
             reservados.
           </div>
         </footer>
+
+        {/* 🔹 Chatbot flotante */}
+        <ChatBot />
 
         <ScrollRestoration />
         <Scripts />
