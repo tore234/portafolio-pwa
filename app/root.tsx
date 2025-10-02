@@ -12,8 +12,8 @@ import "./app.css";
 import { NavLink } from "react-router";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import ChatBot from "./components/ChatBot"; // 🔹 Import del chatbot
-
+import ChatBot from "./components/ChatBot"; 
+import InstallPrompt from "./components/InstallPrompt"; // 👈 Importamos el botón PWA
 
 // 🔹 Safe wrapper para evitar errores en SSR
 function SafeAnimatePresence({ children }: { children: React.ReactNode }) {
@@ -76,21 +76,13 @@ export function Layout({ children }: { children: React.ReactNode }) {
               <NavLink to="/" viewTransition className="hover:text-sky-400">
                 Inicio
               </NavLink>
-              <NavLink
-                to="/projects"
-                viewTransition
-                className="hover:text-sky-400"
-              >
+              <NavLink to="/projects" viewTransition className="hover:text-sky-400">
                 Proyectos
               </NavLink>
               <NavLink to="/about" viewTransition className="hover:text-sky-400">
                 Sobre mí
               </NavLink>
-              <NavLink
-                to="/contact"
-                viewTransition
-                className="hover:text-sky-400"
-              >
+              <NavLink to="/contact" viewTransition className="hover:text-sky-400">
                 Contacto
               </NavLink>
             </nav>
@@ -156,6 +148,9 @@ export function Layout({ children }: { children: React.ReactNode }) {
 
         {/* 🔹 Chatbot flotante */}
         <ChatBot />
+
+        {/* 🔹 Botón de instalación PWA */}
+        <InstallPrompt />
 
         <ScrollRestoration />
         <Scripts />

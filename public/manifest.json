@@ -1,0 +1,46 @@
+{
+  "name": "Portafolio Salvador Trenado",
+  "short_name": "PortafolioSTH",
+  "description": "Portafolio profesional de Salvador Trenado Hernández. Frontend React ⚛️, UI/UX 🎨, Scrum 📈 y creador de contenido 🎥.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0f172a",
+  "theme_color": "#0ea5e9",
+  "orientation": "portrait",
+  "categories": ["portfolio", "frontend", "ui-ux", "scrum", "tecnología"],
+  "icons": [
+    {
+      "src": "/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Proyectos",
+      "short_name": "Proyectos",
+      "description": "Mira mis proyectos destacados 🚀",
+      "url": "/projects",
+      "icons": [{ "src": "/icons/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Sobre mí",
+      "short_name": "Sobre mí",
+      "description": "Conoce mi perfil, skills y valores 🌟",
+      "url": "/about",
+      "icons": [{ "src": "/icons/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Contacto",
+      "short_name": "Contacto",
+      "description": "Hablemos de tu proyecto ✉️",
+      "url": "/contact",
+      "icons": [{ "src": "/icons/icon-192.png", "sizes": "192x192" }]
+    }
+  ]
+}

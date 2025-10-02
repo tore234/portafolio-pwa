@@ -70,7 +70,7 @@ export default function ContactInfo() {
               <span className="text-base font-medium text-slate-200">
                 {r.label}
               </span>
-              <span className="text-xs text-slate-400">{r.value}</span>
+              <span className="text-xs text-slate-400 break-all">{r.value}</span>
             </motion.button>
           ) : (
             <motion.a

@@ -1,10 +1,25 @@
+import type { MetaFunction } from "react-router";
 import { useState } from "react";
 import { NavLink } from "react-router";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { TypeAnimation } from "react-type-animation";
 
-export default function Home() {
+// ✅ Meta para manifest y theme-color
+export const meta: MetaFunction = () => {
+  return [
+    { title: "Portafolio Salvador Trenado" },
+    {
+      name: "description",
+      content:
+        "Portafolio profesional de Salvador Trenado Hernández. Frontend React ⚛️, UI/UX 🎨, Scrum 📈 y creador de contenido 🎥.",
+    },
+    { name: "theme-color", content: "#0ea5e9" },
+    { rel: "manifest", href: "/manifest.json" },
+  ];
+};
+
+export default function Index() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   const navLinkClass =
@@ -141,51 +156,50 @@ export default function Home() {
           </div>
 
           {/* Botones */}
-<div className="mt-6 flex flex-wrap justify-center lg:justify-start gap-3">
-  <motion.div whileHover={{ scale: 1.05 }}>
-    <NavLink
-      to="/projects"
-      viewTransition
-      className="inline-flex items-center justify-center min-w-[140px] px-5 py-2.5 rounded-lg 
+          <div className="mt-6 flex flex-wrap justify-center lg:justify-start gap-3">
+            <motion.div whileHover={{ scale: 1.05 }}>
+              <NavLink
+                to="/projects"
+                viewTransition
+                className="inline-flex items-center justify-center min-w-[140px] px-5 py-2.5 rounded-lg 
                  bg-gradient-to-r from-sky-600 to-cyan-500 text-white 
                  shadow-[0_0_12px_rgba(0,200,255,0.6)] 
                  hover:shadow-[0_0_18px_rgba(0,200,255,0.9)] transition"
-    >
-      🚀 Ver proyectos
-    </NavLink>
-  </motion.div>
+              >
+                🚀 Ver proyectos
+              </NavLink>
+            </motion.div>
 
-  <motion.div whileHover={{ scale: 1.05 }}>
-    <NavLink
-      to="/contact"
-      viewTransition
-      className="inline-flex items-center justify-center min-w-[140px] px-5 py-2.5 rounded-lg 
+            <motion.div whileHover={{ scale: 1.05 }}>
+              <NavLink
+                to="/contact"
+                viewTransition
+                className="inline-flex items-center justify-center min-w-[140px] px-5 py-2.5 rounded-lg 
                  border border-sky-600 text-sky-400 
                  hover:bg-sky-900 transition"
-    >
-      ✉️ Contáctame
-    </NavLink>
-  </motion.div>
+              >
+                ✉️ Contáctame
+              </NavLink>
+            </motion.div>
 
-  <motion.div whileHover={{ scale: 1.05 }}>
-    <a
-      href="/CV-Salvador-Trenado.pdf"
-      download
-      className="inline-flex items-center justify-center min-w-[140px] px-5 py-2.5 rounded-lg 
+            <motion.div whileHover={{ scale: 1.05 }}>
+              <a
+                href="/CV-Salvador-Trenado.pdf"
+                download
+                className="inline-flex items-center justify-center min-w-[140px] px-5 py-2.5 rounded-lg 
                  bg-gradient-to-r from-slate-700 to-slate-600 text-white 
                  shadow-[0_0_12px_rgba(100,100,100,0.6)] 
                  hover:shadow-[0_0_18px_rgba(150,150,150,0.9)] 
                  hover:from-slate-600 hover:to-slate-500 
                  border border-slate-500 transition"
-    >
-      📄 Descargar CV
-    </a>
-  </motion.div>
-</div>
-
+              >
+                📄 Descargar CV
+              </a>
+            </motion.div>
+          </div>
         </motion.div>
 
-        {/* Banner responsive con efecto glass */}
+        {/* Banner responsive */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
